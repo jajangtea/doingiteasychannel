@@ -2,8 +2,8 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -23,48 +23,55 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ?
-                ['label' => 'Login', 'url' => ['/site/login']] :
-                [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ],
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+<header>
+    <nav class="row">
+      <div class="nav-wrapper">
+        <div class="col s12">
+          <a href="<?= Yii::$app->homeUrl ?>" class="brand-logo"><?= Yii::$app->name ?></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href=" <?= Url::to('index.php?r=site/index') ?> ">Home</a></li>
+            <li><a href="<?= Url::to('index.php?r=site/about') ?>">About</a></li>
+            <li><a href="<?= Url::to('index.php?r=site/contact') ?>">Contact</a></li>
+            <li>
+            <?=
+              (Yii::$app->user->isGuest)?  '<a href="'.Url::to("index.php?r=user/security/login").'">Login</a>' : '<a href="'.Url::to("index.php?r=user/security/logout").'">Logout</a>'
+            ?>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+<main class='container'>
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?= $content ?>
+</main>
+<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">DoingITeasyChannel</h5>
+        <p class="grey-text text-lighten-4">Website for the DoingITeasyChannel Followers</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="https://www.youtube.com/channel/UCaDQTcZrzZqym56ikdOlJow">DoingITeasyChannel YouTube Channel</a></li>
+          <li><a class="grey-text text-lighten-3" href="https://twitter.com/Uthpala_419">Follow Me - Uthpala Heenatigala</a></li>
+          <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/groups/doingiteasychannelwebdevs/">DoingITeasyChannel Web Devs Facebook Group</a></li>
+          <li><a class="grey-text text-lighten-3" href="http://doingiteasy.net/">DoingITeasy IT Solutions Provider</a></li>
+        </ul>
+      </div>
     </div>
-</div>
-
-<footer class="footer">
+  </div>
+  <div class="footer-copyright">
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->name .' '. date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+    © 2016 DoingITeasyChannel
+    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
     </div>
+  </div>
 </footer>
 
 <?php $this->endBody() ?>
