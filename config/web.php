@@ -7,6 +7,10 @@ $config = [
     'name' => 'DoingITeasyChannel',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+
+    //'defaultRoute' => 'site/default',
+    //'catchAll' => ['site/offline'],
+
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -30,23 +34,19 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        // 'user' => [
-        //     'identityClass' => 'app\models\User',
-        //     'enableAutoLogin' => true,
-        // ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
-                'username' => 'your_email_goes_here',
-                'password' => 'your_password_goes_here',
-                'port' => '587',
-                'encryption' => 'tls',
-            ],
+            // 'class' => 'yii\swiftmailer\Mailer',
+            // 'transport' => [
+            //     'class' => 'Swift_SmtpTransport',
+            //     'host' => 'smtp.gmail.com',
+            //     'username' => 'your_email_goes_here',
+            //     'password' => 'your_password_goes_here',
+            //     'port' => '587',
+            //     'encryption' => 'tls',
+            // ],
             //'useFileTransport' => true,
         ],
         'log' => [
@@ -59,6 +59,16 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'urlManager' =>[
+          'enablePrettyUrl'=>'true',
+          // 'showScriptName'=>'false',
+          // 'rules'=>[
+          //   'register' => 'user/registration/register',
+          //   '<controller>s' => '<controller>/index',
+          //   '<controller>/<id:\d+>' => '<controller>/view',
+          //
+          // ]
+        ]
     ],
     'params' => $params,
 ];

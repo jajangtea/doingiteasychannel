@@ -52,6 +52,10 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionOffline(){
+      echo 'We are Offline';
+    }
+
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
